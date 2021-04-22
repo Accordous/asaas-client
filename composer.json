@@ -1,0 +1,41 @@
+{
+    "name": "accordous/asaas-client",
+    "description": "Client for Asaas API",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Pedro Augusto",
+            "email": "pams.pedro@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Accordous\\AsaasClient\\Providers\\AsaasClientServiceProvider"
+            ],
+            "aliases": {
+              "AsaasClient" : "Accordous\\AsaasClient\\Facades\\AsaasClient"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Accordous\\AsaasClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Accordous\\AsaasClient\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "illuminate/support": "^7.0|^8.0",
+        "illuminate/http": "^7.0|^8.0",
+        "guzzlehttp/guzzle": "^7.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.5"
+    }
+}
