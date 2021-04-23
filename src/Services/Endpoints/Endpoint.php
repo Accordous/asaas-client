@@ -3,6 +3,7 @@
 namespace Accordous\AsaasClient\Services\Endpoints;
 
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Validator;
 
 abstract class Endpoint
 {
@@ -13,8 +14,23 @@ abstract class Endpoint
         $this->http = $http;
     }
 
-    protected function client()
+    protected function client(): PendingRequest
     {
         return $this->http;
+    }
+
+    protected function validate(array $attributes): array
+    {
+        return Validator::validate($attributes, $this->rules(), $this->messages());
+    }
+
+    protected function rules(): array
+    {
+        return [];
+    }
+
+    protected function messages(): array
+    {
+        return [];
     }
 }

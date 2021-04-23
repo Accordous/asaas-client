@@ -13,6 +13,35 @@ class CustomerTest extends TestCase
     /**
      * @test
      */
+    public function canDestroyCustomer()
+    {
+        $customer = AsaasClient::customers()->store([
+            'name' => $this->faker->name,
+            'cpfCnpj' => $this->faker->numerify('538.861.930-39'), // fake valid cpf
+            'postalCode' => $this->faker->numerify('########'),
+            'email' => $this->faker->email
+        ])->json();
+
+        $removed = AsaasClient::customers()->destroy($customer['id']);
+
+        $this->assertEquals('200', $removed->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function canFilterListCustomers()
+    {
+        $data = AsaasClient::customers()->index([
+            'email' => $this->faker->email
+        ])->json();
+
+        $this->assertEquals('list', $data['object']);
+    }
+
+    /**
+     * @test
+     */
     public function canListCustomers()
     {
         $data = AsaasClient::customers()->index()->json();
@@ -23,7 +52,7 @@ class CustomerTest extends TestCase
     /**
      * @test
      */
-    public function nameIsRequired()
+    public function customerNameIsRequired()
     {
         $data = AsaasClient::customers()->store([])->json();
 
@@ -33,7 +62,7 @@ class CustomerTest extends TestCase
     /**
      * @test
      */
-    public function documentIsRequired()
+    public function customerDocumentIsRequired()
     {
         $data = AsaasClient::customers()->store([
             'cpfCnpj' => $this->faker->numerify('###########'),
