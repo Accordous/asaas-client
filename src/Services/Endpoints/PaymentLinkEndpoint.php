@@ -26,7 +26,7 @@ class PaymentLinkEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI . '/' . $id, $this->validate($attributes));
     }
 
-    public function delete(string $id)
+    public function destroy(string $id)
     {
         return $this->client()->delete(self::BASE_URI . '/' . $id);
     }
@@ -58,7 +58,6 @@ class PaymentLinkEndpoint extends Endpoint
             'chargeType' => 'Forma de cobrança é obrigatório.',
         ];
     }
-
 
     protected function attributes(): array
     {
