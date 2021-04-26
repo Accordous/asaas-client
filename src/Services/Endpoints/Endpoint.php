@@ -33,4 +33,9 @@ abstract class Endpoint
     {
         return [];
     }
+
+    protected function attributes(): array
+    {
+        return [];
+    }
 }

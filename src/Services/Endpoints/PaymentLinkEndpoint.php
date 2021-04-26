@@ -54,8 +54,24 @@ class PaymentLinkEndpoint extends Endpoint
     {
         return [
             'name' => 'Nome é obrigatório.',
-            'billingType' => 'Tipo da cobrança é obrigatório.', // BOLETO; CREDIT_CARD
-            'chargeType' => 'Forma de cobrança é obrigatório.', // DETACHED; RECURRENT; INSTALLMENT
+            'billingType' => 'Tipo da cobrança é obrigatório.',
+            'chargeType' => 'Forma de cobrança é obrigatório.',
+        ];
+    }
+
+
+    protected function attributes(): array
+    {
+        return [
+            'name',
+            'description',
+            'endDate',
+            'value',
+            'billingType',
+            'chargeType',
+            'dueDateLimitDays',
+            'subscriptionCycle',
+            'maxInstallmentCount',
         ];
     }
 }

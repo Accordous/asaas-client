@@ -45,6 +45,9 @@ class PaymentEndpoint extends Endpoint
             'dueDate' => 'required',
             'installmentCount' => 'required_with:installmentValue',
             'installmentValue' => 'required_with:installmentCount',
+            'creditCard' => 'required_if:billingType:CREDIT_CARD',
+            'creditCardHolderInfo' => 'required_if:billingType:CREDIT_CARD',
+            'remoteIp' => 'required_if:billingType:CREDIT_CARD',
         ];
     }
 
@@ -52,9 +55,52 @@ class PaymentEndpoint extends Endpoint
     {
         return [
             'customer' => 'Cliente é obrigatório.',
-            'billingType' => 'Tipo da cobrança é obrigatório.', // BOLETO; CREDIT_CARD
+            'billingType' => 'Tipo da cobrança é obrigatório.',
             'value' => 'Valor é obrigatório.',
             'dueDate' => 'Venciomento é obrigatório.',
+            'creditCard' => 'Cartão de crédito é obrigatório.',
+            'creditCardHolderInfo' => 'Titular do cartão de crédito é obrigatório.',
+            'remoteIp' => 'IP de onde o cliente está fazendo a compra é obrigatório.',
+        ];
+    }
+
+    protected function attributes(): array
+    {
+        return [
+            'customer',
+            'billingType',
+            'value',
+            'dueDate',
+            'description',
+            'externalReference',
+            'installmentCount',
+            'installmentValue',
+            'discount',
+            'interest',
+            'fine',
+            'postalService',
+        ];
+    }
+
+    protected function creditCardAttributes(): array
+    {
+        return [
+            'customer',
+            'billingType',
+            'value',
+            'dueDate',
+            'description',
+            'externalReference',
+            'installmentCount',
+            'installmentValue',
+            'discount',
+            'interest',
+            'fine',
+            'postalService',
+            'creditCard',
+            'creditCardHolderInfo',
+            'creditCardToken',
+            'remoteIp',
         ];
     }
 }

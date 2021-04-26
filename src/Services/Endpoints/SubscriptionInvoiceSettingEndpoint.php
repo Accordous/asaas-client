@@ -25,4 +25,16 @@ class SubscriptionInvoiceSettingEndpoint extends Endpoint
     {
         return $this->client()->delete(sprintf(self::BASE_URI, $id));
     }
+
+    protected function attributes(): array
+    {
+        return [
+            'deductions',
+            'effectiveDatePeriod',
+            'receivedOnly',
+            'daysBeforeDueDate',
+            'observations',
+            'taxes',
+        ];
+    }
 }

@@ -53,4 +53,27 @@ class CustomerEndpoint extends Endpoint
             'postalCode' => 'CEP é obrigatório.'
         ];
     }
+
+    protected function attributes(): array
+    {
+        return [
+            'name',
+            'cpfCnpj',
+            'email',
+            'phone',
+            'mobilePhone',
+            'address',
+            'addressNumber',
+            'complement',
+            'province',
+            'postalCode',
+            'externalReference',
+            'notificationDisabled',
+            'additionalEmails',
+            'municipalInscription',
+            'stateInscription',
+            'observations',
+            'groupName',
+        ];
+    }
 }

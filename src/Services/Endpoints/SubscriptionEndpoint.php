@@ -49,6 +49,9 @@ class SubscriptionEndpoint extends Endpoint
             'value' => 'required',
             'nextDueDate' => 'required',
             'cycle' => 'required',
+            'creditCard' => 'required_if:billingType:CREDIT_CARD',
+            'creditCardHolderInfo' => 'required_if:billingType:CREDIT_CARD',
+            'remoteIp' => 'required_if:billingType:CREDIT_CARD',
         ];
     }
 
@@ -56,10 +59,53 @@ class SubscriptionEndpoint extends Endpoint
     {
         return [
             'customer' => 'Cliente é obrigatório.',
-            'billingType' => 'Tipo da cobrança é obrigatório.', // BOLETO; CREDIT_CARD; UNDEFINED
+            'billingType' => 'Tipo da cobrança é obrigatório.',
             'value' => 'Valor é obrigatório.',
             'nextDueDate' => 'Venciomento é obrigatório.',
-            'cycle' => 'Periodicidade é obrigatório.', // WEEKLY; BIWEEKLY; MONTHLY; QUARTERLY; SEMIANNUALLY; YEARLY
+            'cycle' => 'Periodicidade é obrigatório.',
+            'creditCard' => 'Cartão de crédito é obrigatório.',
+            'creditCardHolderInfo' => 'Titular do cartão de crédito é obrigatório.',
+            'remoteIp' => 'IP de onde o cliente está fazendo a compra é obrigatório.',
+        ];
+    }
+
+    protected function attributes(): array
+    {
+        return [
+            'customer',
+            'billingType',
+            'value',
+            'nextDueDate',
+            'discount',
+            'interest',
+            'fine',
+            'cycle',
+            'description',
+            'endDate',
+            'maxPayments',
+            'externalReference',
+        ];
+    }
+
+    protected function creditCardAttributes(): array
+    {
+        return [
+            'customer',
+            'billingType',
+            'value',
+            'dueDate',
+            'description',
+            'externalReference',
+            'installmentCount',
+            'installmentValue',
+            'discount',
+            'interest',
+            'fine',
+            'postalService',
+            'creditCard',
+            'creditCardHolderInfo',
+            'creditCardToken',
+            'remoteIp',
         ];
     }
 }
