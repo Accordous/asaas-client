@@ -3,6 +3,7 @@
 namespace Accordous\AsaasClient\Services;
 
 use Accordous\AsaasClient\Services\Endpoints\AntecipationEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\BillEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentDunningEndpoint;
@@ -67,6 +68,11 @@ class AsaasService
     private $paymentdunnings;
 
     /**
+     * @var BillEndpoint
+     */
+    private $bills;
+
+    /**
      * AssasService constructor.
      * @param string $token
      */
@@ -85,6 +91,7 @@ class AsaasService
         $this->transfers = new TransferEndpoint($this->http);
         $this->antecipations = new AntecipationEndpoint($this->http);
         $this->paymentdunnings = new PaymentDunningEndpoint($this->http);
+        $this->bills = new BillEndpoint($this->http);
     }
 
     /**
@@ -157,5 +164,13 @@ class AsaasService
     public function paymentdunnings()
     {
         return $this->paymentdunnings;
+    }
+
+    /**
+     * @return BillEndpoint
+     */
+    public function bills()
+    {
+        return $this->bills;
     }
 }
