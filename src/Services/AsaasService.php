@@ -2,6 +2,7 @@
 
 namespace Accordous\AsaasClient\Services;
 
+use Accordous\AsaasClient\Services\Endpoints\AntecipationEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentEndpoint;
@@ -55,6 +56,11 @@ class AsaasService
     private $transfers;
 
     /**
+     * @var AntecipationEndpoint
+     */
+    private $antecipations;
+
+    /**
      * AssasService constructor.
      * @param string $token
      */
@@ -71,6 +77,7 @@ class AsaasService
         $this->subscriptionInvoiceSettings =  new SubscriptionInvoiceSettingEndpoint($this->http);
         $this->paymentLinks = new PaymentLinkEndpoint($this->http);
         $this->transfers = new TransferEndpoint($this->http);
+        $this->antecipations = new AntecipationEndpoint($this->http);
     }
 
     /**
@@ -127,5 +134,13 @@ class AsaasService
     public function transfers()
     {
         return $this->transfers;
+    }
+
+    /**
+     * @return AntecipationEndpoint
+     */
+    public function antecipations()
+    {
+        return $this->antecipations;
     }
 }
