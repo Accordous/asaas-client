@@ -5,6 +5,8 @@ namespace Accordous\AsaasClient\Services;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\SubscriptionEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\SubscriptionInvoiceSettingEndpoint;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
@@ -31,6 +33,16 @@ class AsaasService
     private $installments;
 
     /**
+     * @var SubscriptionEndpoint
+     */
+    private $subscriptions;
+
+    /**
+     * @var SubscriptionInvoiceSettingEndpoint
+     */
+    private $subscriptionInvoiceSettings;
+
+    /**
      * AssasService constructor.
      * @param string $token
      */
@@ -43,6 +55,8 @@ class AsaasService
         $this->customers =  new CustomerEndpoint($this->http);
         $this->payments =  new PaymentEndpoint($this->http);
         $this->installments =  new InstallmentEndpoint($this->http);
+        $this->subscriptions =  new SubscriptionEndpoint($this->http);
+        $this->subscriptionInvoiceSettings =  new SubscriptionInvoiceSettingEndpoint($this->http);
     }
 
     /**
@@ -67,5 +81,21 @@ class AsaasService
     public function installments()
     {
         return $this->installments;
+    }
+
+    /**
+     * @return SubscriptionEndpoint
+     */
+    public function subscriptions()
+    {
+        return $this->subscriptions;
+    }
+
+    /**
+     * @return SubscriptionInvoiceSettingEndpoint
+     */
+    public function subscriptionInvoiceSetting()
+    {
+        return $this->subscriptionInvoiceSettings;
     }
 }
