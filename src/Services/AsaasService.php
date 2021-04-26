@@ -8,6 +8,7 @@ use Accordous\AsaasClient\Services\Endpoints\PaymentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentLinkEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\SubscriptionEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\SubscriptionInvoiceSettingEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\TransferEndpoint;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
@@ -48,6 +49,10 @@ class AsaasService
      */
     private $paymentLinks;
 
+    /**
+     * @var TransferEndpoint
+     */
+    private $transfers;
 
     /**
      * AssasService constructor.
@@ -65,6 +70,7 @@ class AsaasService
         $this->subscriptions =  new SubscriptionEndpoint($this->http);
         $this->subscriptionInvoiceSettings =  new SubscriptionInvoiceSettingEndpoint($this->http);
         $this->paymentLinks = new PaymentLinkEndpoint($this->http);
+        $this->transfers = new TransferEndpoint($this->http);
     }
 
     /**
@@ -113,5 +119,13 @@ class AsaasService
     public function paymentLinks()
     {
         return $this->paymentLinks;
+    }
+
+    /**
+     * @return TransferEndpoint
+     */
+    public function transfers()
+    {
+        return $this->transfers;
     }
 }
