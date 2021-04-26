@@ -5,11 +5,10 @@ namespace Accordous\AsaasClient\Services;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentEndpoint;
-use Exception;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
-class AssasService
+class AsaasService
 {
     /**
      * @var \Illuminate\Http\Client\PendingRequest
@@ -32,14 +31,14 @@ class AssasService
     private $installments;
 
     /**
-     * AsaasClientService constructor.
-     * @throws Exception
+     * AssasService constructor.
+     * @param string $token
      */
-    public function __construct()
+    public function __construct(string $token)
     {
         $this->http = Http::withOptions(['verify' => false]);
         $this->http->baseUrl(Config::get('asaas.host') .  '/' . Config::get('asaas.version'));
-        $this->http->withHeaders(['access_token' => Config::get('asaas.token')]);
+        $this->http->withHeaders(['access_token' => $token]);
 
         $this->customers =  new CustomerEndpoint($this->http);
         $this->payments =  new PaymentEndpoint($this->http);

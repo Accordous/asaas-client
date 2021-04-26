@@ -2,9 +2,11 @@
 
 namespace Accordous\AsaasClient\Tests\Unit;
 
-use Accordous\AsaasClient\Facades\AsaasClient;
+use Accordous\AsaasClient\Services\AsaasService;
 use Accordous\AsaasClient\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Validation\ValidationException;
 
 class CustomerTest extends TestCase
 {
@@ -15,14 +17,16 @@ class CustomerTest extends TestCase
      */
     public function canDestroyCustomer()
     {
-        $customer = AsaasClient::customers()->store([
+        $service = new AsaasService(Config::get('asaas.token'));
+
+        $customer = $service->customers()->store([
             'name' => $this->faker->name,
             'cpfCnpj' => $this->faker->numerify('538.861.930-39'), // fake valid cpf
             'postalCode' => $this->faker->numerify('########'),
             'email' => $this->faker->email
         ])->json();
 
-        $removed = AsaasClient::customers()->destroy($customer['id']);
+        $removed = $service->customers()->destroy($customer['id']);
 
         $this->assertEquals('200', $removed->getStatusCode());
     }
@@ -32,7 +36,9 @@ class CustomerTest extends TestCase
      */
     public function canFilterListCustomers()
     {
-        $data = AsaasClient::customers()->index([
+        $service = new AsaasService(Config::get('asaas.token'));
+
+        $data = $service->customers()->index([
             'email' => $this->faker->email
         ])->json();
 
@@ -44,7 +50,9 @@ class CustomerTest extends TestCase
      */
     public function canListCustomers()
     {
-        $data = AsaasClient::customers()->index()->json();
+        $service = new AsaasService(Config::get('asaas.token'));
+
+        $data = $service->customers()->index()->json();
 
         $this->assertEquals('list', $data['object']);
     }
@@ -52,22 +60,12 @@ class CustomerTest extends TestCase
     /**
      * @test
      */
-    public function customerNameIsRequired()
+    public function checkValidationCustomer()
     {
-        $data = AsaasClient::customers()->store([])->json();
+        $this->expectException(ValidationException::class);
 
-        $this->assertEquals('invalid_name', $data['errors'][0]['code']);
-    }
+        $service = new AsaasService(Config::get('asaas.token'));
 
-    /**
-     * @test
-     */
-    public function customerDocumentIsRequired()
-    {
-        $data = AsaasClient::customers()->store([
-            'cpfCnpj' => $this->faker->numerify('###########'),
-        ])->json();
-
-        $this->assertEquals('invalid_cpfCnpj', $data['errors'][0]['code']);
+        $service->customers()->store([]);
     }
 }

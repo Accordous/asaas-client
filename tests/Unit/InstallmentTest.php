@@ -2,9 +2,10 @@
 
 namespace Accordous\AsaasClient\Tests\Unit;
 
-use Accordous\AsaasClient\Facades\AsaasClient;
+use Accordous\AsaasClient\Services\AsaasService;
 use Accordous\AsaasClient\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Config;
 
 class InstallmentTest extends TestCase
 {
@@ -15,14 +16,16 @@ class InstallmentTest extends TestCase
      */
     public function canListInstallment()
     {
-        $customer = AsaasClient::customers()->store([
+        $service = new AsaasService(Config::get('asaas.token'));
+
+        $customer = $service->customers()->store([
             'name' => $this->faker->name,
             'cpfCnpj' => $this->faker->numerify('538.861.930-39'), // fake valid cpf
             'postalCode' => $this->faker->numerify('########'),
             'email' => $this->faker->email
         ])->json();
 
-        $payment = AsaasClient::payments()->store([
+        $payment = $service->payments()->store([
             'customer' => $customer['id'],
             'billingType' => 'BOLETO',
             'dueDate' => now(),
@@ -31,10 +34,10 @@ class InstallmentTest extends TestCase
         ])->json();
 
 
-        $installments = AsaasClient::installments()->index()->json();
+        $installments = $service->installments()->index()->json();
 
-        AsaasClient::customers()->destroy($customer['id']);
-        AsaasClient::payments()->destroy($payment['id']);
+        $service->customers()->destroy($customer['id']);
+        $service->payments()->destroy($payment['id']);
 
         $this->assertEquals('list', $installments['object']);
     }

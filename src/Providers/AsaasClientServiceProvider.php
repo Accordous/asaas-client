@@ -2,7 +2,7 @@
 
 namespace Accordous\AsaasClient\Providers;
 
-use Accordous\AsaasClient\Services\AssasService;
+use Accordous\AsaasClient\Services\AsaasService;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,10 +35,6 @@ class AsaasClientServiceProvider extends ServiceProvider implements DeferrablePr
         $this->mergeConfigFrom(
             self::ROOT_PATH . '/config/asaas.php', 'asaas'
         );
-
-        $this->app->singleton(AssasService::class, function () {
-            return new AssasService();
-        });
     }
 
     /**
@@ -49,7 +45,7 @@ class AsaasClientServiceProvider extends ServiceProvider implements DeferrablePr
     public function provides()
     {
         return [
-            AssasService::class
+            AsaasService::class
         ];
     }
 }
