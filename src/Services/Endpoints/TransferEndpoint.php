@@ -4,7 +4,7 @@ namespace Accordous\AsaasClient\Services\Endpoints;
 
 class TransferEndpoint extends Endpoint
 {
-    private const BASE_URI = '/tranfers';
+    private const BASE_URI = '/transfers';
 
     public function index(array $filters = [])
     {
