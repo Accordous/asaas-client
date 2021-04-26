@@ -49,9 +49,9 @@ class SubscriptionEndpoint extends Endpoint
             'value' => 'required',
             'nextDueDate' => 'required',
             'cycle' => 'required',
-            'creditCard' => 'required_if:billingType:CREDIT_CARD',
-            'creditCardHolderInfo' => 'required_if:billingType:CREDIT_CARD',
-            'remoteIp' => 'required_if:billingType:CREDIT_CARD',
+            'creditCard' => 'required_if:billingType,CREDIT_CARD',
+            'creditCardHolderInfo' => 'required_if:billingType,CREDIT_CARD',
+            'remoteIp' => 'required_if:billingType,CREDIT_CARD',
         ];
     }
 

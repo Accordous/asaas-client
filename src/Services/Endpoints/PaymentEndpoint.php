@@ -45,9 +45,9 @@ class PaymentEndpoint extends Endpoint
             'dueDate' => 'required',
             'installmentCount' => 'required_with:installmentValue',
             'installmentValue' => 'required_with:installmentCount',
-            'creditCard' => 'required_if:billingType:CREDIT_CARD',
-            'creditCardHolderInfo' => 'required_if:billingType:CREDIT_CARD',
-            'remoteIp' => 'required_if:billingType:CREDIT_CARD',
+            'creditCard' => 'required_if:billingType,CREDIT_CARD',
+            'creditCardHolderInfo' => 'required_if:billingType,CREDIT_CARD',
+            'remoteIp' => 'required_if:billingType,CREDIT_CARD',
         ];
     }
 
