@@ -11,17 +11,17 @@ class SubscriptionInvoiceSettingEndpoint extends Endpoint
         return $this->client()->post(sprintf(self::BASE_URI, $id), $attributes);
     }
 
-    public function show(int $id)
+    public function show(string $id)
     {
         return $this->client()->get(sprintf(self::BASE_URI, $id));
     }
 
-    public function update(int $id,  array $attributes)
+    public function update(string $id,  array $attributes)
     {
         return $this->client()->post(sprintf(self::BASE_URI, $id), $attributes);
     }
 
-    public function destroy(int $id)
+    public function destroy(string $id)
     {
         return $this->client()->delete(sprintf(self::BASE_URI, $id));
     }

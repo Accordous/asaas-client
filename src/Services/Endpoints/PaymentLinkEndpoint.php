@@ -16,17 +16,17 @@ class PaymentLinkEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI, $this->validate($attributes));
     }
 
-    public function show(int $id)
+    public function show(string $id)
     {
         return $this->client()->get(self::BASE_URI . '/' . $id);
     }
 
-    public function update(int $id, array $attributes)
+    public function update(string $id, array $attributes)
     {
         return $this->client()->post(self::BASE_URI . '/' . $id, $this->validate($attributes));
     }
 
-    public function delete(int $id)
+    public function delete(string $id)
     {
         return $this->client()->delete(self::BASE_URI . '/' . $id);
     }

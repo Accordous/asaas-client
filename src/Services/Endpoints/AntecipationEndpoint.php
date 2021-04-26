@@ -16,7 +16,7 @@ class AntecipationEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI, $this->validate($attributes));
     }
 
-    public function show(int $id)
+    public function show(string $id)
     {
         return $this->client()->get(self::BASE_URI . '/' . $id);
     }

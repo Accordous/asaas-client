@@ -36,7 +36,7 @@ class SubscriptionEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI . '/' . $id . '/payments');
     }
 
-    public function invoices(int $id, array $filters = [])
+    public function invoices(string $id, array $filters = [])
     {
         return $this->client()->get(self::BASE_URI . '/' . $id . '/invoices', $filters);
     }
