@@ -31,13 +31,20 @@ class PaymentEndpoint extends Endpoint
         return $this->client()->delete(self::BASE_URI . '/' . $id);
     }
 
+    public function receiveInCash(string $id)
+    {
+        return $this->client()->delete(self::BASE_URI . '/' . $id . '/receiveInCash');
+    }
+
     protected function rules(): array
     {
         return [
             'customer' => 'required',
             'billingType' => 'required',
-            'value' => 'required',
+            'value' => 'required_without:installmentCount',
             'dueDate' => 'required',
+            'installmentCount' => 'required_with:installmentValue',
+            'installmentValue' => 'required_with:installmentCount',
         ];
     }
 
@@ -45,7 +52,7 @@ class PaymentEndpoint extends Endpoint
     {
         return [
             'customer' => 'Cliente é obrigatório.',
-            'billingType' => 'Tipo da cobrança é obrigatório.', // BOLETO; CREDIT_CART
+            'billingType' => 'Tipo da cobrança é obrigatório.', // BOLETO; CREDIT_CARD
             'value' => 'Valor é obrigatório.',
             'dueDate' => 'Venciomento é obrigatório.',
         ];

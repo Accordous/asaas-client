@@ -3,6 +3,7 @@
 namespace Accordous\AsaasClient\Services;
 
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentEndpoint;
 use Exception;
 use Illuminate\Support\Facades\Config;
@@ -26,6 +27,11 @@ class AssasService
     private $payments;
 
     /**
+     * @var InstallmentEndpoint
+     */
+    private $installments;
+
+    /**
      * AsaasClientService constructor.
      * @throws Exception
      */
@@ -37,6 +43,7 @@ class AssasService
 
         $this->customers =  new CustomerEndpoint($this->http);
         $this->payments =  new PaymentEndpoint($this->http);
+        $this->installments =  new InstallmentEndpoint($this->http);
     }
 
     /**
@@ -53,5 +60,13 @@ class AssasService
     public function payments()
     {
         return $this->payments;
+    }
+
+    /**
+     * @return InstallmentEndpoint
+     */
+    public function installments()
+    {
+        return $this->installments;
     }
 }

@@ -4,6 +4,7 @@ namespace Accordous\AsaasClient\Facades;
 
 use Accordous\AsaasClient\Services\AssasService;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentEndpoint;
 use Illuminate\Support\Facades\Facade;
 
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @method CustomerEndpoint customers()
  * @method PaymentEndpoint payments()
+ * @method InstallmentEndpoint installments()
  */
 class AsaasClient extends Facade
 {
