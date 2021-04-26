@@ -4,6 +4,7 @@ namespace Accordous\AsaasClient\Services;
 
 use Accordous\AsaasClient\Services\Endpoints\AntecipationEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\BillEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\CreaditBureauReportEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentDunningEndpoint;
@@ -73,6 +74,11 @@ class AsaasService
     private $bills;
 
     /**
+     * @var CreaditBureauReportEndpoint
+     */
+    private $creaditBureauReports;
+
+    /**
      * AssasService constructor.
      * @param string $token
      */
@@ -92,6 +98,7 @@ class AsaasService
         $this->antecipations = new AntecipationEndpoint($this->http);
         $this->paymentdunnings = new PaymentDunningEndpoint($this->http);
         $this->bills = new BillEndpoint($this->http);
+        $this->creaditBureauReports = new CreaditBureauReportEndpoint($this->http);
     }
 
     /**
@@ -172,5 +179,13 @@ class AsaasService
     public function bills()
     {
         return $this->bills;
+    }
+
+    /**
+     * @return CreaditBureauReportEndpoint
+     */
+    public function creaditBureauReports()
+    {
+        return $this->creaditBureauReports;
     }
 }
