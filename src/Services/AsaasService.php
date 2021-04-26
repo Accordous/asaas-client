@@ -6,7 +6,10 @@ use Accordous\AsaasClient\Services\Endpoints\AntecipationEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\BillEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\CreaditBureauReportEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\FinancialTransactionsEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\MyAccountEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\PaymentCheckoutConfigEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentDunningEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentLinkEndpoint;
@@ -79,6 +82,21 @@ class AsaasService
     private $creaditBureauReports;
 
     /**
+     * @var FinancialTransactionsEndpoint
+     */
+    private $financialTransactions;
+
+    /**
+     * @var MyAccountEndpoint
+     */
+    private $myAccount;
+
+    /**
+     * @var PaymentCheckoutConfigEndpoint
+     */
+    private $paymentCheckoutConfigs;
+
+    /**
      * AssasService constructor.
      * @param string $token
      */
@@ -99,6 +117,9 @@ class AsaasService
         $this->paymentdunnings = new PaymentDunningEndpoint($this->http);
         $this->bills = new BillEndpoint($this->http);
         $this->creaditBureauReports = new CreaditBureauReportEndpoint($this->http);
+        $this->financialTransactions = new FinancialTransactionsEndpoint($this->http);
+        $this->myAccount = new MyAccountEndpoint($this->http);
+        $this->paymentCheckoutConfigs = new PaymentCheckoutConfigEndpoint($this->http);
     }
 
     /**
@@ -187,5 +208,29 @@ class AsaasService
     public function creaditBureauReports()
     {
         return $this->creaditBureauReports;
+    }
+
+    /**
+     * @return FinancialTransactionsEndpoint
+     */
+    public function financialTransactions()
+    {
+        return $this->financialTransactions;
+    }
+
+    /**
+     * @return MyAccountEndpoint
+     */
+    public function myAccount()
+    {
+        return $this->myAccount;
+    }
+
+    /**
+     * @return PaymentCheckoutConfigEndpoint
+     */
+    public function paymentCheckoutConfigs()
+    {
+        return $this->paymentCheckoutConfigs;
     }
 }
