@@ -8,6 +8,7 @@ use Accordous\AsaasClient\Services\Endpoints\CreaditBureauReportEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\FinancialTransactionsEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\InvoiceEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\MyAccountEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentCheckoutConfigEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentDunningEndpoint;
@@ -16,6 +17,8 @@ use Accordous\AsaasClient\Services\Endpoints\PaymentLinkEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\SubscriptionEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\SubscriptionInvoiceSettingEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\TransferEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\WebhookEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\WebhookInvoiceEndpoint;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
@@ -97,6 +100,21 @@ class AsaasService
     private $paymentCheckoutConfigs;
 
     /**
+     * @var InvoiceEndpoint
+     */
+    private $invoices;
+
+    /**
+     * @var WebhookEndpoint
+     */
+    private $webhook;
+
+    /**
+     * @var WebhookInvoiceEndpoint
+     */
+    private $webhookInvoices;
+
+    /**
      * AssasService constructor.
      * @param string $token
      */
@@ -120,12 +138,15 @@ class AsaasService
         $this->financialTransactions = new FinancialTransactionsEndpoint($this->http);
         $this->myAccount = new MyAccountEndpoint($this->http);
         $this->paymentCheckoutConfigs = new PaymentCheckoutConfigEndpoint($this->http);
+        $this->invoices = new InvoiceEndpoint($this->http);
+        $this->webhook = new WebhookEndpoint($this->http);
+        $this->webhookInvoices = new WebhookInvoiceEndpoint($this->http);
     }
 
     /**
      * @return CustomerEndpoint
      */
-    public function customers()
+    public function customers(): CustomerEndpoint
     {
         return $this->customers;
     }
@@ -133,7 +154,7 @@ class AsaasService
     /**
      * @return PaymentEndpoint
      */
-    public function payments()
+    public function payments(): PaymentEndpoint
     {
         return $this->payments;
     }
@@ -141,7 +162,7 @@ class AsaasService
     /**
      * @return InstallmentEndpoint
      */
-    public function installments()
+    public function installments(): InstallmentEndpoint
     {
         return $this->installments;
     }
@@ -149,7 +170,7 @@ class AsaasService
     /**
      * @return SubscriptionEndpoint
      */
-    public function subscriptions()
+    public function subscriptions(): SubscriptionEndpoint
     {
         return $this->subscriptions;
     }
@@ -157,7 +178,7 @@ class AsaasService
     /**
      * @return SubscriptionInvoiceSettingEndpoint
      */
-    public function subscriptionInvoiceSetting()
+    public function subscriptionInvoiceSetting(): SubscriptionInvoiceSettingEndpoint
     {
         return $this->subscriptionInvoiceSettings;
     }
@@ -165,7 +186,7 @@ class AsaasService
     /**
      * @return PaymentLinkEndpoint
      */
-    public function paymentLinks()
+    public function paymentLinks(): PaymentLinkEndpoint
     {
         return $this->paymentLinks;
     }
@@ -173,7 +194,7 @@ class AsaasService
     /**
      * @return TransferEndpoint
      */
-    public function transfers()
+    public function transfers(): TransferEndpoint
     {
         return $this->transfers;
     }
@@ -181,7 +202,7 @@ class AsaasService
     /**
      * @return AntecipationEndpoint
      */
-    public function antecipations()
+    public function antecipations(): AntecipationEndpoint
     {
         return $this->antecipations;
     }
@@ -189,7 +210,7 @@ class AsaasService
     /**
      * @return PaymentDunningEndpoint
      */
-    public function paymentdunnings()
+    public function paymentdunnings(): PaymentDunningEndpoint
     {
         return $this->paymentdunnings;
     }
@@ -197,7 +218,7 @@ class AsaasService
     /**
      * @return BillEndpoint
      */
-    public function bills()
+    public function bills(): BillEndpoint
     {
         return $this->bills;
     }
@@ -205,7 +226,7 @@ class AsaasService
     /**
      * @return CreaditBureauReportEndpoint
      */
-    public function creaditBureauReports()
+    public function creaditBureauReports(): CreaditBureauReportEndpoint
     {
         return $this->creaditBureauReports;
     }
@@ -213,7 +234,7 @@ class AsaasService
     /**
      * @return FinancialTransactionsEndpoint
      */
-    public function financialTransactions()
+    public function financialTransactions(): FinancialTransactionsEndpoint
     {
         return $this->financialTransactions;
     }
@@ -221,7 +242,7 @@ class AsaasService
     /**
      * @return MyAccountEndpoint
      */
-    public function myAccount()
+    public function myAccount(): MyAccountEndpoint
     {
         return $this->myAccount;
     }
@@ -229,8 +250,32 @@ class AsaasService
     /**
      * @return PaymentCheckoutConfigEndpoint
      */
-    public function paymentCheckoutConfigs()
+    public function paymentCheckoutConfigs(): PaymentCheckoutConfigEndpoint
     {
         return $this->paymentCheckoutConfigs;
+    }
+
+    /**
+     * @return InvoiceEndpoint
+     */
+    public function invoices(): InvoiceEndpoint
+    {
+        return $this->invoices;
+    }
+
+    /**
+     * @return WebhookEndpoint
+     */
+    public function webhook(): WebhookEndpoint
+    {
+        return $this->webhook;
+    }
+
+    /**
+     * @return WebhookInvoiceEndpoint
+     */
+    public function webhookInvoices(): WebhookInvoiceEndpoint
+    {
+        return $this->webhookInvoices;
     }
 }
