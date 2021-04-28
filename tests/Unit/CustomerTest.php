@@ -68,4 +68,27 @@ class CustomerTest extends TestCase
 
         $service->customers()->store([]);
     }
+
+    /**
+     * @test
+     */
+    public function canGetCustomerByCPF()
+    {
+        $service = new AsaasService(Config::get('asaas.token'));
+
+        $customer = $service->customers()->store([
+            'name' => $this->faker->name,
+            'cpfCnpj' => $this->faker->numerify('503.327.400-72'), // fake valid cpf
+            'postalCode' => $this->faker->numerify('########'),
+            'email' => $this->faker->email
+        ])->json();
+
+        $data = $service->customers()->index([
+            'cpfCnpj' => $customer['cpfCnpj']
+        ])->json()['data'];
+
+        $service->customers()->destroy($customer['id']);
+
+        $this->assertEquals('50332740072', $data[0]['cpfCnpj']);
+    }
 }
