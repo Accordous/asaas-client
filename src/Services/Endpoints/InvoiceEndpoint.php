@@ -49,6 +49,15 @@ class InvoiceEndpoint extends Endpoint
             'value' => 'required',
             'deductions' => 'required',
             'effectiveDate' => 'required',
+            'payment' => 'nullable',
+            'installment' => 'nullable',
+            'customer' => 'nullable',
+            'externalReference' => 'nullable',
+            'municipalServiceId' => 'nullable',
+            'municipalServiceCode' => 'nullable',
+            'municipalServiceName' => 'nullable',
+            'updatePayment' => 'nullable',
+            'taxes' => 'nullable',
         ];
     }
 

@@ -25,6 +25,8 @@ class CreaditBureauReportEndpoint extends Endpoint
     {
         return [
             'state' => 'required',
+            'customer' => 'nullable',
+            'cpfCnpj' => 'nullable',
         ];
     }
 

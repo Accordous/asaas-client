@@ -26,7 +26,17 @@ class AntecipationEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI . '/simulate', $this->validate($attributes));
     }
 
-    public function attributes(): array
+    protected function rules(): array
+    {
+        return [
+            'agreementSignature' => 'nullable',
+            'installment' => 'nullable',
+            'payment' => 'nullable',
+            'documents' => 'nullable',
+        ];
+    }
+
+    protected function attributes(): array
     {
         return [
             'agreementSignature',

@@ -8,7 +8,7 @@ class SubscriptionInvoiceSettingEndpoint extends Endpoint
 
     public function create(int $id,  array $attributes)
     {
-        return $this->client()->post(sprintf(self::BASE_URI, $id), $attributes);
+        return $this->client()->post(sprintf(self::BASE_URI, $id), $this->validate($attributes));
     }
 
     public function show(string $id)
@@ -18,12 +18,24 @@ class SubscriptionInvoiceSettingEndpoint extends Endpoint
 
     public function update(string $id,  array $attributes)
     {
-        return $this->client()->post(sprintf(self::BASE_URI, $id), $attributes);
+        return $this->client()->post(sprintf(self::BASE_URI, $id), $this->validate($attributes));
     }
 
     public function destroy(string $id)
     {
         return $this->client()->delete(sprintf(self::BASE_URI, $id));
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'deductions' => 'nullable',
+            'effectiveDatePeriod' => 'nullable',
+            'receivedOnly' => 'nullable',
+            'daysBeforeDueDate' => 'nullable',
+            'observations' => 'nullable',
+            'taxes' => 'nullable',
+        ];
     }
 
     protected function attributes(): array

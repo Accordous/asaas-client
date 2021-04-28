@@ -64,6 +64,9 @@ class PaymentDunningEndpoint extends Endpoint
             'customerAddressNumber' => 'required',
             'customerProvince' => 'required',
             'documents' => 'required',
+            'description' => 'nullable',
+            'customerSecondaryPhone' => 'nullable',
+            'customerComplement' => 'nullable',
         ];
     }
 
@@ -83,7 +86,7 @@ class PaymentDunningEndpoint extends Endpoint
         ];
     }
 
-    public function attributes(): array
+    protected function attributes(): array
     {
         return [
             'payment',

@@ -47,6 +47,12 @@ class PaymentLinkEndpoint extends Endpoint
             'name' => 'required',
             'billingType' => 'required',
             'chargeType' => 'required',
+            'description' => 'nullable',
+            'endDate' => 'nullable',
+            'value' => 'nullable',
+            'dueDateLimitDays' => 'nullable',
+            'subscriptionCycle' => 'nullable',
+            'maxInstallmentCount' => 'nullable',
         ];
     }
 

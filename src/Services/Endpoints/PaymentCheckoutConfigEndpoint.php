@@ -23,6 +23,7 @@ class PaymentCheckoutConfigEndpoint extends Endpoint
             'infoBackgroundColor' => 'required',
             'fontColor' => 'required',
             'enabled' => 'required',
+            'logoFile' => 'nullable',
         ];
     }
 
@@ -36,7 +37,7 @@ class PaymentCheckoutConfigEndpoint extends Endpoint
         ];
     }
 
-    public function attributes(): array
+    protected function attributes(): array
     {
         return [
             'logoBackgroundColor',

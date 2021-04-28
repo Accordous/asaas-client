@@ -27,6 +27,10 @@ class AccountEndpoint extends Endpoint
             'address' => 'required',
             'province' => 'required',
             'postalCode' => 'required',
+            'loginEmail' => 'nullable',
+            'companyType' => 'nullable',
+            'addressNumber' => 'nullable',
+            'complement' => 'nullable',
         ];
     }
 

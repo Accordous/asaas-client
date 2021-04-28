@@ -52,6 +52,18 @@ class SubscriptionEndpoint extends Endpoint
             'creditCard' => 'required_if:billingType,CREDIT_CARD',
             'creditCardHolderInfo' => 'required_if:billingType,CREDIT_CARD',
             'remoteIp' => 'required_if:billingType,CREDIT_CARD',
+            'discount' => 'nullable',
+            'interest' => 'nullable',
+            'fine' => 'nullable',
+            'description' => 'nullable',
+            'endDate' => 'nullable',
+            'maxPayments' => 'nullable',
+            'externalReference' => 'nullable',
+            'dueDate' => 'nullable',
+            'installmentCount' => 'nullable',
+            'installmentValue' => 'nullable',
+            'postalService' => 'nullable',
+            'creditCardToken' => 'nullable',
         ];
     }
 

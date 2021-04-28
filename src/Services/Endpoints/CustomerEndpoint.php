@@ -42,6 +42,20 @@ class CustomerEndpoint extends Endpoint
             'name' => 'required',
             'cpfCnpj' => 'required',
             'postalCode' => 'required',
+            'email' => 'nullable',
+            'phone' => 'nullable',
+            'mobilePhone' => 'nullable',
+            'address' => 'nullable',
+            'addressNumber' => 'nullable',
+            'complement' => 'nullable',
+            'province' => 'nullable',
+            'externalReference' => 'nullable',
+            'notificationDisabled' => 'nullable',
+            'additionalEmails' => 'nullable',
+            'municipalInscription' => 'nullable',
+            'stateInscription' => 'nullable',
+            'observations' => 'nullable',
+            'groupName' => 'nullable',
         ];
     }
 

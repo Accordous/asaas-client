@@ -41,6 +41,11 @@ class BillEndpoint extends Endpoint
         return [
             'identificationField' => 'required_without:barCode',
             'barCode' => 'required_without:identificationField',
+            'scheduleDate' => 'nullable',
+            'description' => 'nullable',
+            'discount' => 'nullable',
+            'dueDate' => 'nullable',
+            'value' => 'nullable',
         ];
     }
 

@@ -24,6 +24,7 @@ class WebhookInvoiceEndpoint extends Endpoint
             'apiVersion' => 'required',
             'enabled' => 'required',
             'interrupted' => 'required',
+            'authToken' => 'nullable',
         ];
     }
 

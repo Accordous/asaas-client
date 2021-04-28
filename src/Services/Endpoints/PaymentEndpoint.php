@@ -48,6 +48,13 @@ class PaymentEndpoint extends Endpoint
             'creditCard' => 'required_if:billingType,CREDIT_CARD',
             'creditCardHolderInfo' => 'required_if:billingType,CREDIT_CARD',
             'remoteIp' => 'required_if:billingType,CREDIT_CARD',
+            'description' => 'nullable',
+            'externalReference' => 'nullable',
+            'discount' => 'nullable',
+            'interest' => 'nullable',
+            'fine' => 'nullable',
+            'postalService' => 'nullable',
+            'creditCardToken' => 'nullable',
         ];
     }
 
