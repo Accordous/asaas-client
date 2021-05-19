@@ -127,7 +127,7 @@ class AsaasService
 
         $this->myAccount = new MyAccountEndpoint($this->http);
 
-        if (! $this->myAccount->index() && App::environment('production')) {
+        if (App::environment('production') && ! $this->myAccount->index()) {
             throw new \Exception('Integração com Asaas inválida! Consulte o suporte e verifique se as credenciais estão corretas.');
         }
 
