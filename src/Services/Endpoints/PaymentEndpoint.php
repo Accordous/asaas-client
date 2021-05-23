@@ -55,6 +55,7 @@ class PaymentEndpoint extends Endpoint
             'fine' => 'nullable',
             'postalService' => 'nullable',
             'creditCardToken' => 'nullable',
+            'status' => 'nullable',
         ];
     }
 
@@ -86,6 +87,7 @@ class PaymentEndpoint extends Endpoint
             'interest',
             'fine',
             'postalService',
+            'status',
         ];
     }
 
