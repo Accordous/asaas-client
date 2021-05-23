@@ -122,7 +122,7 @@ class AsaasService
     public function __construct(string $token)
     {
         $this->http = Http::withOptions(['verify' => false]);
-        $this->http->baseUrl(Config::get('asaas.host') .  '/' . Config::get('asaas.version'));
+        $this->http->baseUrl(Config::get('asaas.host') .  Config::get('asaas.api'));
         $this->http->withHeaders(['access_token' => $token]);
 
         $this->myAccount = new MyAccountEndpoint($this->http);
