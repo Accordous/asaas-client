@@ -31,9 +31,9 @@ class PaymentEndpoint extends Endpoint
         return $this->client()->delete(self::BASE_URI . '/' . $id);
     }
 
-    public function receiveInCash(string $id)
+    public function receiveInCash(string $id, array $attributes)
     {
-        return $this->client()->delete(self::BASE_URI . '/' . $id . '/receiveInCash');
+        return $this->client()->post(self::BASE_URI . '/' . $id . '/receiveInCash', $attributes);
     }
 
     protected function rules(): array
