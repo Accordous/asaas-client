@@ -10,7 +10,7 @@ use Accordous\AsaasClient\ValueObject\BankAccount;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
 
-class BanksTest extends TestCase
+class BankAccountTest extends TestCase
 {
     use WithFaker;
 
@@ -23,7 +23,8 @@ class BanksTest extends TestCase
 
         $bank = new Bank($this->faker->numerify('###'));
 
-        $bankAccount = new BankAccount($bank,
+        $bankAccount = new BankAccount(
+            $bank,
             $this->faker->name,
             $this->faker->name,
             $this->faker->date,
@@ -34,23 +35,19 @@ class BanksTest extends TestCase
             $this->faker->randomElement([BankAccountType::CONTA_CORRENTE, BankAccountType::CONTA_POUPANCA])
         );
 
-        dd($bankAccount->toArray());
-
         $response = $service->bankAccounts()->store([
-            'accountName' => 'required',
-            'thirdPartyAccount' => 'required',
-            'bank' => 'required',
-            'agency' => 'required',
-            'account' => 'required',
-            'accountDigit' => 'required',
-            'bankAccountType' => 'required',
-            'name' => 'required',
-            'cpfCnpj' => 'required',
-            'responsiblePhone' => 'nullable',
-            'responsibleEmail' => 'nullable',
+            'bank' => $bank->code,
+            'accountName' => $bankAccount->accountName,
+            'name' => $bankAccount->ownerName,
+            'cpfCnpj' => $bankAccount->cpfCnpj,
+            'agency' => $bankAccount->agency,
+            'account' => $bankAccount->account,
+            'accountDigit' => $bankAccount->accountDigit,
+            'bankAccountType' => $bankAccount->bankAccountType,
+            'thirdPartyAccount' => $this->faker->boolean,
         ]);
 
-        dd($response);
+        dd($response->json());
 //        $this->assertEquals($walletId, $response['walletId']);
     }
 }
