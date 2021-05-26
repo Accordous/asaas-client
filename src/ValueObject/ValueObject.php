@@ -8,4 +8,9 @@ abstract class ValueObject
     {
         return json_encode($this, JSON_UNESCAPED_UNICODE);
     }
+
+    public function toArray()
+    {
+        return (array) $this;
+    }
 }
