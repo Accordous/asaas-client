@@ -29,8 +29,8 @@ abstract class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app): void
     {
-        $app['config']->set('asaas.host', 'https://sandbox.asaas.com/api');
-        $app['config']->set('asaas.version', 'v3');
+        $app['config']->set('asaas.host', 'https://sandbox.asaas.com');
+        $app['config']->set('asaas.api', '/api/v3');
         $app['config']->set('asaas.token', '!@@@#$%*@#$@$');
     }
 }
