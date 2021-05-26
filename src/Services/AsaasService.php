@@ -19,6 +19,7 @@ use Accordous\AsaasClient\Services\Endpoints\SubscriptionInvoiceSettingEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\TransferEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\WebhookEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\WebhookInvoiceEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\BankAccountEndpoint;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
@@ -69,6 +70,11 @@ class AsaasService
      * @var AntecipationEndpoint
      */
     private $antecipations;
+
+    /**
+     * @var BankAccountEndpoint
+     */
+    private $bankAccounts;
 
     /**
      * @var PaymentDunningEndpoint
@@ -139,6 +145,7 @@ class AsaasService
         $this->paymentLinks = new PaymentLinkEndpoint($this->http);
         $this->transfers = new TransferEndpoint($this->http);
         $this->antecipations = new AntecipationEndpoint($this->http);
+        $this->bankAccounts = new BankAccountEndpoint($this->http);
         $this->paymentdunnings = new PaymentDunningEndpoint($this->http);
         $this->bills = new BillEndpoint($this->http);
         $this->creaditBureauReports = new CreaditBureauReportEndpoint($this->http);
@@ -211,6 +218,14 @@ class AsaasService
     public function antecipations(): AntecipationEndpoint
     {
         return $this->antecipations;
+    }
+
+    /**
+     * @return BankAccountEndpoint
+     */
+    public function bankAccounts(): BankAccountEndpoint
+    {
+        return $this->bankAccounts;
     }
 
     /**
