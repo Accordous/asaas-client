@@ -4,7 +4,7 @@ namespace Accordous\AsaasClient\ValueObject;
 
 class Bank extends ValueObject
 {
-    private $code;
+    public $code;
 
     public function __construct(int $code)
     {

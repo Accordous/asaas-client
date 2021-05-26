@@ -7,15 +7,15 @@ use Exception;
 
 class BankAccount extends ValueObject
 {
-    private $bank;
-    private $accountName;
-    private $ownerName;
-    private $ownerBirthDate;
-    private $cpfCnpj;
-    private $agency;
-    private $account;
-    private $accountDigit;
-    private $bankAccountType;
+    public $bank;
+    public $accountName;
+    public $ownerName;
+    public $ownerBirthDate;
+    public $cpfCnpj;
+    public $agency;
+    public $account;
+    public $accountDigit;
+    public $bankAccountType;
 
     public function __construct(Bank $bank, string $accountName, string $ownerName, string $ownerBirthDate, string $cpfCnpj, string $agency, string $account, string $accountDigit, string $bankAccountType)
     {

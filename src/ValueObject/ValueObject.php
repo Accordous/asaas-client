@@ -11,6 +11,6 @@ abstract class ValueObject
 
     public function toArray()
     {
-        return (array) $this;
+        return json_decode(json_encode($this), true);
     }
 }
