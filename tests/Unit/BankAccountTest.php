@@ -17,7 +17,7 @@ class BanksTest extends TestCase
     /**
      * @test
      */
-    public function canCreateAsaasBanks()
+    public function canCreateAsaasBankAccounts()
     {
         $service = new AsaasService(Config::get('asaas.token'));
 
@@ -31,10 +31,25 @@ class BanksTest extends TestCase
             $this->faker->numerify('###'),
             $this->faker->numerify('######'),
             $this->faker->numerify('#'),
-            $this->faker->randomElements([BankAccountType::CONTA_CORRENTE,BankAccountType::CONTA_POUPANCA])
+            $this->faker->randomElement([BankAccountType::CONTA_CORRENTE, BankAccountType::CONTA_POUPANCA])
         );
 
-        $response = $service->bankAccounts()->store($bankAccount->toArray());
+        dd($bankAccount->toArray());
+
+        $response = $service->bankAccounts()->store([
+            'accountName' => 'required',
+            'thirdPartyAccount' => 'required',
+            'bank' => 'required',
+            'agency' => 'required',
+            'account' => 'required',
+            'accountDigit' => 'required',
+            'bankAccountType' => 'required',
+            'name' => 'required',
+            'cpfCnpj' => 'required',
+            'responsiblePhone' => 'nullable',
+            'responsibleEmail' => 'nullable',
+        ]);
+
         dd($response);
 //        $this->assertEquals($walletId, $response['walletId']);
     }
