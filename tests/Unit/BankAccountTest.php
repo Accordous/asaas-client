@@ -47,7 +47,6 @@ class BankAccountTest extends TestCase
             'thirdPartyAccount' => $this->faker->boolean,
         ]);
 
-        dd($response->json());
-//        $this->assertEquals($walletId, $response['walletId']);
+        $this->assertEquals('200', $response->getStatusCode());
     }
 }
