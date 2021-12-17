@@ -20,6 +20,7 @@ use Accordous\AsaasClient\Services\Endpoints\TransferEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\WebhookEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\WebhookInvoiceEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\BankAccountEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\AccountEndpoint;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
@@ -30,6 +31,11 @@ class AsaasService
      * @var \Illuminate\Http\Client\PendingRequest
      */
     private $http;
+
+    /**
+     * @var AccountEndpoint
+     */
+    private $account;
 
     /**
      * @var CustomerEndpoint
@@ -132,11 +138,12 @@ class AsaasService
         $this->http->withHeaders(['access_token' => $token]);
 
         $this->myAccount = new MyAccountEndpoint($this->http);
-
+        
         if (App::environment('production') && ! $this->myAccount->index()) {
             throw new \Exception('Integração com Asaas inválida! Consulte o suporte e verifique se as credenciais estão corretas.');
         }
 
+        $this->account = new AccountEndpoint($this->http); 
         $this->customers =  new CustomerEndpoint($this->http);
         $this->payments =  new PaymentEndpoint($this->http);
         $this->installments =  new InstallmentEndpoint($this->http);
@@ -154,6 +161,14 @@ class AsaasService
         $this->invoices = new InvoiceEndpoint($this->http);
         $this->webhook = new WebhookEndpoint($this->http);
         $this->webhookInvoices = new WebhookInvoiceEndpoint($this->http);
+    }
+
+    /**
+     * @return AccountEndpoint
+     */
+    public function account(): AccountEndpoint
+    {
+        return $this->account;
     }
 
     /**
