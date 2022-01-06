@@ -21,6 +21,7 @@ use Accordous\AsaasClient\Services\Endpoints\WebhookEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\WebhookInvoiceEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\BankAccountEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\AccountEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\DocumentEndpoint;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
@@ -31,6 +32,11 @@ class AsaasService
      * @var \Illuminate\Http\Client\PendingRequest
      */
     private $http;
+
+    /**
+     * @var DocumentEndpoint
+     */
+    private $document;
 
     /**
      * @var AccountEndpoint
@@ -143,6 +149,7 @@ class AsaasService
             throw new \Exception('Integração com Asaas inválida! Consulte o suporte e verifique se as credenciais estão corretas.');
         }
 
+        $this->document = new DocumentEndpoint($this->http); 
         $this->account = new AccountEndpoint($this->http); 
         $this->customers =  new CustomerEndpoint($this->http);
         $this->payments =  new PaymentEndpoint($this->http);
@@ -161,6 +168,14 @@ class AsaasService
         $this->invoices = new InvoiceEndpoint($this->http);
         $this->webhook = new WebhookEndpoint($this->http);
         $this->webhookInvoices = new WebhookInvoiceEndpoint($this->http);
+    }
+
+     /**
+     * @return AccountEndpoint
+     */
+    public function document(): DocumentEndpoint
+    {
+        return $this->document;
     }
 
     /**
