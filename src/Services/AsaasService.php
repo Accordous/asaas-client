@@ -10,6 +10,7 @@ use Accordous\AsaasClient\Services\Endpoints\FinancialTransactionsEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InvoiceEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\MyAccountEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\MyAccountStatusEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentCheckoutConfigEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentDunningEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PaymentEndpoint;
@@ -120,6 +121,11 @@ class AsaasService
     private $myAccount;
 
     /**
+     * @var MyAccountStatusEndpoint
+     */
+    private $myAccountStatus;
+
+    /**
      * @var PaymentCheckoutConfigEndpoint
      */
     private $paymentCheckoutConfigs;
@@ -175,6 +181,7 @@ class AsaasService
         $this->invoices = new InvoiceEndpoint($this->http);
         $this->webhook = new WebhookEndpoint($this->http);
         $this->webhookInvoices = new WebhookInvoiceEndpoint($this->http);
+        $this->myAccountStatus = new MyAccountStatusEndpoint($this->http);
     }
     
     /**
@@ -311,6 +318,14 @@ class AsaasService
     public function myAccount(): MyAccountEndpoint
     {
         return $this->myAccount;
+    }
+
+    /**
+     * @return MyAccountStatusEndpoint
+     */
+    public function myAccountStatus(): MyAccountStatusEndpoint
+    {
+        return $this->myAccountStatus;
     }
 
     /**
