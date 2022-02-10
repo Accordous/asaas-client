@@ -10,4 +10,9 @@ class MyAccountEndpoint extends Endpoint
     {
         return $this->client()->get(self::BASE_URI, $filters);
     }
+
+    public function status(array $filters = [])
+    {
+        return $this->client()->get(self::BASE_URI . '/status', $filters);
+    }
 }
