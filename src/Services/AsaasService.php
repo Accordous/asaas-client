@@ -23,6 +23,7 @@ use Accordous\AsaasClient\Services\Endpoints\BankAccountEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\AccountEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\DocumentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\FinanceEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\PixEndpoint;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
@@ -33,6 +34,11 @@ class AsaasService
      * @var \Illuminate\Http\Client\PendingRequest
      */
     private $http;
+
+    /**
+     * @var PixEndpoint
+     */
+    private $pix;
 
     /**
      * @var FinanceEndpoint
@@ -156,6 +162,7 @@ class AsaasService
             throw new \Exception('Integração com Asaas inválida! Consulte o suporte e verifique se as credenciais estão corretas.');
         }
 
+        $this->pix = new PixEndpoint($this->http); 
         $this->finance = new FinanceEndpoint($this->http); 
         $this->document = new DocumentEndpoint($this->http); 
         $this->account = new AccountEndpoint($this->http); 
@@ -178,6 +185,14 @@ class AsaasService
         $this->webhookInvoices = new WebhookInvoiceEndpoint($this->http);
     }
     
+    /**
+     * @return PixEndpoint
+     */
+    public function pix(): PixEndpoint
+    {
+        return $this->pix;
+    }
+
     /**
      * @return FinanceEndpoint
      */
