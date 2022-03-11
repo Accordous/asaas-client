@@ -12,6 +12,16 @@ class BankAccountEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI, $this->validate($attributes));
     }
 
+    public function show(array $attributes)
+    {
+        return $this->client()->get(self::BASE_URI, $this->validate($attributes));
+    }
+    
+    public function update(array $attributes)
+    {
+        return $this->client()->put(self::BASE_URI, $this->validate($attributes));
+    }
+
     protected function rules(): array
     {
         return [
@@ -32,32 +42,32 @@ class BankAccountEndpoint extends Endpoint
     protected function messages(): array
     {
         return [
-            'accountName' => 'Nome da conta é obrigatório.',
-            'thirdPartyAccount' => 'Conta de terceiros é obrigatório.',
-            'bank' => 'Banco é obrigatório.',
-            'agency' => 'Agência é obrigatório.',
-            'account' => 'Conta é obrigatório.',
-            'accountDigit' => 'Digitos da conta é obrigatório.',
-            'bankAccountType' => 'Tipo da conta bancária é obrigatório.',
-            'name' => 'Nome é obrigatório.',
-            'cpfCnpj' => 'Documento é obrigatório.',
+            'accountName.required' => 'Nome da conta é obrigatório.',
+            'thirdPartyAccount.required' => 'Conta de terceiros é obrigatório.',
+            'bank.required' => 'Banco é obrigatório.',
+            'agency.required' => 'Agência é obrigatório.',
+            'account.required' => 'Conta é obrigatório.',
+            'accountDigit.required' => 'Digitos da conta é obrigatório.',
+            'bankAccountType.required' => 'Tipo da conta bancária é obrigatório.',
+            'name.required' => 'Nome é obrigatório.',
+            'cpfCnpj.required' => 'Documento é obrigatório.',
         ];
     }
 
     protected function attributes(): array
     {
         return [
-            'accountName',
-            'thirdPartyAccount',
-            'bank',
-            'agency',
-            'account',
-            'accountDigit',
-            'bankAccountType',
-            'name',
-            'cpfCnpj',
-            'responsiblePhone',
-            'responsibleEmail',
+            'accountName' => 'Nome da Conta',
+            'thirdPartyAccount' => 'Conta de terceiro',
+            'bank' => 'Banco',
+            'agency' => 'Agência',
+            'account' => 'Conta',
+            'accountDigit' => 'Dígito da Conta',
+            'bankAccountType' => 'Tipo da Conta',
+            'name' => 'Nome',
+            'cpfCnpj' => 'Documento',
+            'responsiblePhone' => 'Telefone do responsável',
+            'responsibleEmail' => 'E-mail do responsável',
         ];
     }
 }
