@@ -12,9 +12,9 @@ class BankAccountEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI, $this->validate($attributes));
     }
 
-    public function show(array $attributes)
+    public function show()
     {
-        return $this->client()->get(self::BASE_URI, $this->validate($attributes));
+        return $this->client()->get(self::BASE_URI);
     }
     
     public function update(array $attributes)
