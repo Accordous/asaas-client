@@ -19,22 +19,31 @@ class WebhookEndpoint extends Endpoint
     protected function rules(): array
     {
         return [
+			'name' => 'required',
             'url' => 'required',
             'email' => 'required',
-            'apiVersion' => 'required',
+	        'sendType' => [
+				'required',
+		        'in:SEQUENTIALLY,NON_SEQUENTIALLY'
+	        ],
             'enabled' => 'required',
             'interrupted' => 'required',
+	        'events' => [
+		        'required',
+		        'array',
+	        ],
         ];
     }
 
     protected function messages(): array
     {
         return [
+			'name' => 'Nome é obrigatório.',
             'url' => 'URL é obrigatória.',
             'email' => 'Email é obrigatória.',
-            'apiVersion' => 'Versão utilizada da API. Utilize "3" para a versão v3.',
             'enabled' => 'Habilitar ou não o webhook.',
             'interrupted' => 'Situação da fila de sincronização é obrigatória.',
+	        'sendType' => 'Tipo de envio do webhook. Utilize "SEQUENTIALLY" para envio sequencial e "NON_SEQUENTIALLY" para envio não sequencial.'
         ];
     }
 
@@ -47,6 +56,8 @@ class WebhookEndpoint extends Endpoint
             'enabled',
             'interrupted',
             'authToken',
+	        'sendType',
+	        'events',
         ];
     }
 }
