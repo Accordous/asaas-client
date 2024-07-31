@@ -32,6 +32,8 @@ class WebhookEndpoint extends Endpoint
 		        'required',
 		        'array',
 	        ],
+	        'apiVersion' => 'nullable',
+			'authToken' => 'nullable',
         ];
     }
 
