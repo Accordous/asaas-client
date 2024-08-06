@@ -157,11 +157,6 @@ class AsaasService
         $this->http->withHeaders(['access_token' => $token]);
 
         $this->myAccount = new MyAccountEndpoint($this->http);
-        
-        if (App::environment('production') && ! $this->myAccount->index()) {
-            throw new \Exception('Integração com Asaas inválida! Consulte o suporte e verifique se as credenciais estão corretas.');
-        }
-
         $this->pix = new PixEndpoint($this->http); 
         $this->finance = new FinanceEndpoint($this->http); 
         $this->document = new DocumentEndpoint($this->http); 
