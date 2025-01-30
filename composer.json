@@ -7,6 +7,10 @@
         {
             "name": "Pedro Augusto",
             "email": "pams.pedro@gmail.com"
+        },
+        {
+            "name": "Lúdio Oliveira",
+            "email": "ludio.ao@gmail.com"
         }
     ],
     "minimum-stability": "dev",

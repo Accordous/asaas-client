@@ -24,9 +24,9 @@ use Accordous\AsaasClient\Services\Endpoints\AccountEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\DocumentEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\FinanceEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\PixEndpoint;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
+use Accordous\AsaasClient\Services\Endpoints\CreditCardEndpoint;
 
 class AsaasService
 {
@@ -147,6 +147,11 @@ class AsaasService
     private $webhookInvoices;
 
     /**
+     * @var CreditCardEndpoint
+     */
+    private $creditCards;
+
+    /**
      * AssasService constructor.
      * @param string $token
      */
@@ -157,10 +162,10 @@ class AsaasService
         $this->http->withHeaders(['access_token' => $token]);
 
         $this->myAccount = new MyAccountEndpoint($this->http);
-        $this->pix = new PixEndpoint($this->http); 
-        $this->finance = new FinanceEndpoint($this->http); 
-        $this->document = new DocumentEndpoint($this->http); 
-        $this->account = new AccountEndpoint($this->http); 
+        $this->pix = new PixEndpoint($this->http);
+        $this->finance = new FinanceEndpoint($this->http);
+        $this->document = new DocumentEndpoint($this->http);
+        $this->account = new AccountEndpoint($this->http);
         $this->customers =  new CustomerEndpoint($this->http);
         $this->payments =  new PaymentEndpoint($this->http);
         $this->installments =  new InstallmentEndpoint($this->http);
@@ -178,8 +183,9 @@ class AsaasService
         $this->invoices = new InvoiceEndpoint($this->http);
         $this->webhook = new WebhookEndpoint($this->http);
         $this->webhookInvoices = new WebhookInvoiceEndpoint($this->http);
+        $this->creditCards = new CreditCardEndpoint($this->http);
     }
-    
+
     /**
      * @return PixEndpoint
      */
@@ -196,7 +202,7 @@ class AsaasService
         return $this->finance;
     }
 
-     /**
+    /**
      * @return AccountEndpoint
      */
     public function document(): DocumentEndpoint
@@ -355,5 +361,13 @@ class AsaasService
     public function webhookInvoices(): WebhookInvoiceEndpoint
     {
         return $this->webhookInvoices;
+    }
+
+    /**
+     * @return CreditCardEndpoint
+     */
+    public function creditCards(): CreditCardEndpoint
+    {
+        return $this->creditCards;
     }
 }
