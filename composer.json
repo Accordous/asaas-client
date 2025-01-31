@@ -42,6 +42,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "fakerphp/faker": "^1.9.1"
     }
 }
