@@ -21,21 +21,21 @@ class BankAccountTest extends TestCase
     {
         $service = new AsaasService(Config::get('asaas.token'));
 
-        $bank = new Bank($this->faker->numerify('###'));
+        $bank = new Bank(341);
 
         $bankAccount = new BankAccount(
             $bank,
             $this->faker->name,
             $this->faker->name,
             $this->faker->date,
-            $this->faker->numerify('###########'),
-            $this->faker->numerify('###'),
-            $this->faker->numerify('######'),
+            '590.437.980-37',
+            '1',
+            '2222',
             $this->faker->numerify('#'),
-            $this->faker->randomElement([BankAccountType::CONTA_CORRENTE, BankAccountType::CONTA_POUPANCA])
+            BankAccountType::CONTA_CORRENTE,
         );
 
-        $response = $service->bankAccounts()->store([
+        $attributes = [
             'bank' => $bank->code,
             'accountName' => $bankAccount->accountName,
             'name' => $bankAccount->ownerName,
@@ -45,7 +45,9 @@ class BankAccountTest extends TestCase
             'accountDigit' => $bankAccount->accountDigit,
             'bankAccountType' => $bankAccount->bankAccountType,
             'thirdPartyAccount' => $this->faker->boolean,
-        ]);
+        ];
+
+        $response = $service->bankAccounts()->store($attributes);
 
         $this->assertEquals('200', $response->getStatusCode());
     }

@@ -20,7 +20,7 @@
                 "Accordous\\AsaasClient\\Providers\\AsaasClientServiceProvider"
             ],
             "aliases": {
-              "AsaasClient" : "Accordous\\AsaasClient\\Facades\\AsaasClient"
+                "AsaasClient": "Accordous\\AsaasClient\\Facades\\AsaasClient"
             }
         }
     },
@@ -44,5 +44,8 @@
         "orchestra/testbench": "^8.0",
         "phpunit/phpunit": "^9.5",
         "fakerphp/faker": "^1.9.1"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }

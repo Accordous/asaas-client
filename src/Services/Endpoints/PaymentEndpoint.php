@@ -2,6 +2,8 @@
 
 namespace Accordous\AsaasClient\Services\Endpoints;
 
+use Illuminate\Support\Facades\Validator;
+
 class PaymentEndpoint extends Endpoint
 {
     private const BASE_URI = '/payments';
@@ -36,6 +38,23 @@ class PaymentEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI . '/' . $id . '/receiveInCash', $attributes);
     }
 
+    protected function validate(array $attributes): array
+    {
+        $rules = $attributes['billingType'] === 'CREDIT_CARD' ? $this->creditCardRules() : $this->rules();
+
+        return Validator::validate($attributes, $rules, $this->messages());
+    }
+
+    protected function creditCardRules(): array
+    {
+        return array_merge($this->rules(), [
+            'creditCard' => 'required_without:creditCardToken',
+            'creditCardHolderInfo' => 'required_without:creditCardToken',
+            'creditCardToken' => 'required_without_all:creditCard,creditCardHolderInfo',
+            'remoteIp' => 'required',
+        ]);
+    }
+
     protected function rules(): array
     {
         return [
@@ -45,17 +64,17 @@ class PaymentEndpoint extends Endpoint
             'dueDate' => 'required',
             'installmentCount' => 'required_with:installmentValue',
             'installmentValue' => 'required_with:installmentCount',
-            'creditCard' => 'required_if:billingType,CREDIT_CARD',
-            'creditCardHolderInfo' => 'required_if:billingType,CREDIT_CARD',
-            'remoteIp' => 'required_if:billingType,CREDIT_CARD',
             'description' => 'nullable',
             'externalReference' => 'nullable',
             'discount' => 'nullable',
             'interest' => 'nullable',
             'fine' => 'nullable',
             'postalService' => 'nullable',
-            'creditCardToken' => 'nullable',
             'status' => 'nullable',
+            'creditCard' => 'nullable',
+            'creditCardHolderInfo' => 'nullable',
+            'creditCardToken' => 'nullable',
+            'remoteIp' => 'nullable',
         ];
     }
 

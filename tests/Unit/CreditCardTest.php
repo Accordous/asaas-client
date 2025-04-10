@@ -33,8 +33,8 @@ class CreditCardTest extends TestCase
 
         $customer = $service->customers()->store([
             'name' => $this->faker->name,
-            'cpfCnpj' => $this->faker->numerify('538.861.930-39'), // fake valid cpf
-            'postalCode' => $this->faker->numerify('########'),
+            'cpfCnpj' => $this->faker->numerify('711.168.120-70'), // fake valid cpf
+            'postalCode' => '01001001',
             'email' => $this->faker->email
         ])->json('id');
 
