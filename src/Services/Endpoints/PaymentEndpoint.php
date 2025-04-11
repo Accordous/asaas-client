@@ -38,6 +38,11 @@ class PaymentEndpoint extends Endpoint
         return $this->client()->post(self::BASE_URI . '/' . $id . '/receiveInCash', $attributes);
     }
 
+    public function pixQrCode(string $id)
+    {
+        return $this->client()->get(self::BASE_URI . '/' . $id . '/pixQrCode');
+    }
+
     protected function validate(array $attributes): array
     {
         $rules = $attributes['billingType'] === 'CREDIT_CARD' ? $this->creditCardRules() : $this->rules();
