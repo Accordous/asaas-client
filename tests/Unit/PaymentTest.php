@@ -165,4 +165,38 @@ class PaymentTest extends TestCase
 
         $this->assertEquals('payment', $payment['object']);
     }
+
+    /**
+     * @test
+     */
+    public function canGetPixQrCode()
+    {
+        $service = new AsaasService(Config::get('asaas.token'));
+
+        $customer = $service->customers()->store([
+            'name' => $this->faker->name,
+            'cpfCnpj' => $this->faker->numerify('538.861.930-39'), // fake valid cpf
+            'postalCode' => $this->faker->numerify('########'),
+            'email' => $this->faker->email
+        ])->json();
+
+        $payment = $service->payments()->store([
+            'customer' => $customer['id'],
+            'billingType' => 'BOLETO',
+            'value' => 5,
+            'dueDate' => now()
+        ])->json();
+
+        $this->assertEquals('payment', $payment['object']);
+
+        $qrCodeJson = $service->payments()->pixQrCode($payment['id'])->json();
+
+        $this->assertTrue($qrCodeJson['success']);
+        $this->assertNotEmpty($qrCodeJson['encodedImage']);
+        $this->assertNotEmpty($qrCodeJson['payload']);
+        $this->assertNotEmpty($qrCodeJson['expirationDate']);
+
+        $service->customers()->destroy($customer['id']);
+        $service->payments()->destroy($payment['id']);
+    }   
 }
