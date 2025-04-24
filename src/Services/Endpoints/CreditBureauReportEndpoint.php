@@ -2,7 +2,7 @@
 
 namespace Accordous\AsaasClient\Services\Endpoints;
 
-class CreaditBureauReportEndpoint extends Endpoint
+class CreditBureauReportEndpoint extends Endpoint
 {
     private const BASE_URI = '/creditBureauReport';
 

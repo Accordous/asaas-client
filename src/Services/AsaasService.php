@@ -4,7 +4,7 @@ namespace Accordous\AsaasClient\Services;
 
 use Accordous\AsaasClient\Services\Endpoints\AntecipationEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\BillEndpoint;
-use Accordous\AsaasClient\Services\Endpoints\CreaditBureauReportEndpoint;
+use Accordous\AsaasClient\Services\Endpoints\CreditBureauReportEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\CustomerEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\FinancialTransactionsEndpoint;
 use Accordous\AsaasClient\Services\Endpoints\InstallmentEndpoint;
@@ -111,9 +111,9 @@ class AsaasService
     private $bills;
 
     /**
-     * @var CreaditBureauReportEndpoint
+     * @var CreditBureauReportEndpoint
      */
-    private $creaditBureauReports;
+    private $creditBureauReports;
 
     /**
      * @var FinancialTransactionsEndpoint
@@ -177,7 +177,7 @@ class AsaasService
         $this->bankAccounts = new BankAccountEndpoint($this->http);
         $this->paymentdunnings = new PaymentDunningEndpoint($this->http);
         $this->bills = new BillEndpoint($this->http);
-        $this->creaditBureauReports = new CreaditBureauReportEndpoint($this->http);
+        $this->creditBureauReports = new CreditBureauReportEndpoint($this->http);
         $this->financialTransactions = new FinancialTransactionsEndpoint($this->http);
         $this->paymentCheckoutConfigs = new PaymentCheckoutConfigEndpoint($this->http);
         $this->invoices = new InvoiceEndpoint($this->http);
@@ -307,11 +307,11 @@ class AsaasService
     }
 
     /**
-     * @return CreaditBureauReportEndpoint
+     * @return CreditBureauReportEndpoint
      */
-    public function creaditBureauReports(): CreaditBureauReportEndpoint
+    public function creditBureauReports(): CreditBureauReportEndpoint
     {
-        return $this->creaditBureauReports;
+        return $this->creditBureauReports;
     }
 
     /**
